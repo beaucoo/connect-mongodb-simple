@@ -58,8 +58,8 @@ Where:
 Write mode (safe, w:, etc) is controlled here. Recommended use is the new [MongoClient](http://mongodb.github.com/node-mongodb-native/api-generated/mongoclient.html)
 * **options** (optional):
     * **ttl** (optional) is the time-to-live for sessions. If omitted, the cookie's maxAge will be used.
-    * **collectionName** to override default 'sessions' MongoDB collection name.
-    * **reapIntervalMs** ms to remove expired sessions. Omit or specify as less than 500 to turn-off.
+    * **collectionName** (optional)to override default 'sessions' MongoDB collection name.
+    * **reapIntervalMs** (optional) to remove expired sessions. Omit or specify as less than 500 to turn-off.
     * **logReaping** (optional) true/false determines whether each reap is logged to console.
 * **modifyFunc** (optional) is a function:
     * Receives a session hash
