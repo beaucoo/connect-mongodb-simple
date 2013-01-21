@@ -1,0 +1,47 @@
+{
+    "name":"connect-mongodb-simple",
+    "description":"Simplified mongodb session store for connect. 1. Leaves the db connection logic to the native mongo driver including write level concerns. 2. Requires a very low number of dependencies meaning it is easily kept up to date (node-mongodb-native 2.x & Connect 2.x). 3. Easy modification of session enabling annotation for use by orthogonal concerns",
+    "version": "0.0.1",
+    "keywords": [
+        "connect",
+        "mongodb",
+        "session"
+    ],
+    "engines": [
+        "node"
+    ],
+    "directories": {
+        "test": "./test"
+    },
+    "scripts": {
+        "test": "mocha test --require should --reporter spec --recursive --grep 'unit tests'"
+    },
+    "contributors": [
+        {
+            "name": "BeauCoo",
+            "email": "info@beaucoo.com",
+            "url": "http://beaucoo.com/"
+        },
+        {
+            "name": "Rick Cotter",
+            "email": "rick@beaucoo.com"
+        }
+    ],
+    "bugs": {
+        "url": "https://github.com/beaucoo/connect-mongodb-simple/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/beaucoo/connect-mongodb-simple.git"
+    },
+    "dependencies":{
+        "lodash":"1.0.0-rc.3"
+    },
+    "devDependencies":{
+        "mongodb":"1.2.x",
+        "connect":"2.7.x",
+        "should":"1.2.x"
+    },
+    "readmeFilename": "README.md",
+    "main":"./connect-mongodb-simple"
+}
