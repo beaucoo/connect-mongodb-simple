@@ -1,7 +1,7 @@
 {
     "name":"connect-mongodb-simple",
     "description":"Simplified mongodb session store for connect. 1. Leaves the db connection logic to the native mongo driver including write level concerns. 2. Requires a very low number of dependencies meaning it is easily kept up to date (node-mongodb-native 2.x & Connect 2.x). 3. Easy modification of session enabling annotation for use by orthogonal concerns",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "keywords": [
         "connect",
         "mongodb",

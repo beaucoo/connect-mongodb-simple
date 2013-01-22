@@ -26,29 +26,39 @@ Via <code>npm install connect-mongodb-simple</code>
 ## Use
 
 <pre><code>
-var MongoStore = require('connect-mongodb-simple')(express);
-// OR var MongoStore = require('connect-mongodb-simple')(connect);
+var createStore = require('connect-mongodb-simple')(express);
+// OR var createStore = require('connect-mongodb-simple')(connect);
 
-var sessionStore = new MongoStore(
+
+// Create synchronously
+createStore(
     openDb,
     {collectionName:"sess", reapIntervalMs:(60 * 1000), ttl:(60 * 60 * 1000},
     function modify(session) { return {...} },
-    function callback() { console.log("done"); }
-    );
+    function callback(err, sessionStore) {
 
-// Where 'app' is an ExpressJS instance (or whatever)
-app.configure(function () {
+        // Where 'app' is an ExpressJS instance (or whatever)
+        app.configure(function () {
 
-    ...
+           ...
 
-    app.use(express.session({
-        cookie:{maxAge:[MAX AGE MS]},
-        store:sessionStore,
-        secret:[SECRET]}
-    ));
+            app.use(express.session({
+                cookie:{maxAge:[MAX AGE MS]},
+                store:sessionStore,
+                secret:[SECRET]}
+            ));
 
-    ...
-});
+            ...
+        });
+    });
+
+
+// Or asynchronously i.e. don't wait for signal that configuration is complete
+var sessionStore = createStore(
+    openDb,
+    {collectionName:"sess", reapIntervalMs:(60 * 1000), ttl:(60 * 60 * 1000},
+    function modify(session) { return {...} });
+
 </code></pre>
 
 
@@ -66,7 +76,11 @@ Write mode (safe, w:, etc) is controlled here. Recommended use is the new [Mongo
     * Can modify it and must return null
     * Or returns a hash that will be merged with the root session document as json. Useful for including extra-info
 that will queried for orthogonal means.
-* **callback** (optional) to know when the async instance construction has completed.
+* **callback** (optional) returns (err, instanceOfSessionStore) to know when the async instance construction has completed.
+
+Returns:
+
+An instance of the mongodb session store
 
 
 ### modifyFunc Example 1:
@@ -116,6 +130,11 @@ Instead of having **connect-mongodb-simple** reap expired sessions use new featu
   a mongod instance at localhost:27017 with a 'test' database)
 * or run continuously via `mocha watch --require should --reporter spec --recursive"`
 
+
+## Release Notes
+
+* 0.1.0 Improved creation
+* 0.0.1 First
 
 ##License
 (The MIT License)

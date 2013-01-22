@@ -49,8 +49,13 @@ module.exports = function (connect, testDbCollection) {
     //   - c) or a combination of the two.
     //   - It has signature function (session) { return {...} or null; }
     //   - Is useful for adding meta-data that can be used by external queries.
-    // - 'callback' (optional) to know when the async instance construction has completed.
+    // - 'callback' (optional) to know when instance creation has completed as async set up e.g. setting the collection.
     function MongoStore(db, options, aModifyFunc, callback) {
+        if (!(this instanceof MongoStore)) {
+            return new MongoStore(db, options, aModifyFunc, callback);
+        }
+
+
         options = options || {};
         Store.call(this, options);
 
@@ -59,6 +64,7 @@ module.exports = function (connect, testDbCollection) {
         }
 
         modifyFunc = aModifyFunc;
+        var self = this;
 
 
         function reap() {
@@ -100,7 +106,7 @@ module.exports = function (connect, testDbCollection) {
 
             dbCollection = collection;
             startReaping(); // Ensure collection exists before reaping begins
-            callback();
+            callback(null, self);
         }
 
 
@@ -110,6 +116,8 @@ module.exports = function (connect, testDbCollection) {
         } else {
             db.collection(options.collectionName || 'sessions', getCollectionCallback);
         }
+
+        return this;
     }
 
 
