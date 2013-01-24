@@ -112,6 +112,10 @@ An instance of the mongodb session store
     }
 
 
+## MongoDB Indexes
+* **_id** field is used for most operations. By default an index already exists.
+* **expires** field is used to query during reaping. Optimize by creating an index.
+
 
 ## Alternative Session Reaping Configuration
 
