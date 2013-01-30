@@ -137,6 +137,7 @@ Instead of having **connect-mongodb-simple** reap expired sessions use new featu
 
 ## Release Notes
 
+* 0.1.1 Reverted to older lodash until RC stabilizes
 * 0.1.0 Improved creation
 * 0.0.1 First
 
